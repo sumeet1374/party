@@ -1,0 +1,42 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+  <div class="container-fluid">
+
+    <a class="navbar-brand text-light" href="#"> <i class="bi bi-balloon"></i> Party</a>
+    <button class="navbar-toggler " (click)="mobileBurgerClick($event)">
+      <span class="navbar-toggler-icon" style="color:white"></span>
+    </button>
+    <div  class="collapse navbar-collapse d-lg-flex "
+          [class.show] = "showMobileMenu"
+          [class.justify-content-between] = "isAuthenticated"
+          [class.justify-content-end] = "!isAuthenticated" >
+      <ul class="navbar-nav " *ngIf="isAuthenticated">
+        <li class="nav-item ">
+           <a class="nav-link text-light" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown " [class.show]="showAdminMenu">
+          <a class="nav-link text-light dropdown-toggle" href="#" (click)="adminMenuClick($event)">Admin</a>
+          <ul class="dropdown-menu" [class.show]="showAdminMenu">
+            <li><a class="dropdown-item" href="#">Users</a></li>
+            <li><a class="dropdown-item" href="#">Friend Groups</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Restaurants</a></li>
+
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav text-light">
+        <li class="nav-item dropdown" [class.show]="showLogoutDropDown">
+           <a href="#" class="nav-link dropdown-toggle text-light" (click)="profileMenuClick($event)">{{isAuthenticated?"Welcome " + userData.name:"Please Login"}}</a>
+
+          <ul class="dropdown-menu" [class.show]="showLogoutDropDown">
+            <li *ngIf="isAuthenticated" ><a class="dropdown-item" href="#" (click)="logout($event)">Profile</a></li>
+            <li *ngIf="isAuthenticated" ><a class="dropdown-item" href="#" (click)="logout($event)">Logout</a></li>
+            <li *ngIf="!isAuthenticated" ><a class="dropdown-item" href="#" (click)="login($event)">Login</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</nav>
